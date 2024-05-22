@@ -36,7 +36,7 @@ export const PokemonProvider = ({ children }) => {
 		setLoading(false);
 	};
 
-	// Llamar todos los pokemones
+	// Llamar todos los pokemons
 	const getGlobalPokemons = async () => {
 		const baseURL = 'https://pokeapi.co/api/v2/';
 

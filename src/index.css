@@ -72,7 +72,7 @@ header form {
 }
 
 .form-group input {
-	/* padding: 15px 30px; */
+
 	font-family: inherit;
 	width: 300px;
 	border: none;
@@ -123,7 +123,6 @@ header form {
 	height: 30px;
 	stroke: #555;
 }
-
 /* Card List Pokemon */
 .card-list-pokemon {
 	display: grid;
@@ -133,12 +132,15 @@ header form {
 
 .card-pokemon {
 	cursor: pointer;
-	text-decoration: none;
+	text-decoration: none; 
+}
+
+.card-pokemon a {
+	text-decoration: none; 
 }
 
 .card-img {
 	background-color: #f2f2f2;
-
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -157,6 +159,7 @@ header form {
 
 .card-info h3 {
 	color: #333;
+	text-decoration: none; 
 }
 
 .pokemon-id {
@@ -177,6 +180,20 @@ header form {
 	border-radius: 5px;
 	color: #fff;
 }
+
+.add-icon {
+    cursor: pointer;
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.alert {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
 
 /* Types of Pokemon */
 .water {
@@ -447,9 +464,8 @@ Styles of Pokemon Single Page
 	color: #000;
 }
 
-/*modal*/
 
-/* src/index.css */
+/* Estilos generales para los modales */
 .modal-overlay {
 	position: fixed;
 	top: 0;
@@ -464,13 +480,492 @@ Styles of Pokemon Single Page
   }
   
   .modal-content {
-	background-color: white;
-	padding: 20px;
-	border-radius: 5px;
+	background-color: #ffffff;
+	padding: 20px 40px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	text-align: center;
+	max-width: 400px;
+	width: 100%;
   }
   
-  .blurred {
-	filter: blur(5px);
+  .modal-content h2 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+	font-size: 24px;
+	color: #333;
   }
   
+  .modal-content h2 .icon {
+	margin: 0 10px;
+	width: 32px;
+	height: 32px;
+  }
+  
+  .modal-content input {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 15px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	box-sizing: border-box;
+  }
+  
+  .modal-content button {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	background-color: #007bff;
+	color: white;
+	font-size: 16px;
+	cursor: pointer;
+	margin-bottom: 10px; 
+  }
+  
+  .modal-content button:last-child {
+	margin-bottom: 0;
+  }
+  
+  .modal-content button:hover {
+	background-color: #0056b3;
+  }
+  
+  .register-link {
+	color: #007bff;
+	cursor: pointer;
+	text-decoration: underline;
+	margin-top: 15px; 
+  }
+  
+  .register-link:hover {
+	color: #0056b3;
+  }
+  
+  .error-message {
+	color: red;
+	margin-bottom: 15px;
+  }
+  
+  /* Estilos para la selección de personajes */
+  .character-selection {
+	text-align: center;
+	margin-bottom: 15px;
+  }
+  
+  .characters {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 10px;
+  }
+  
+  .character {
+	cursor: pointer;
+	border: 2px solid transparent;
+	border-radius: 8px;
+	padding: 10px;
+	transition: border-color 0.3s;
+  }
+  
+  .character img {
+	width: 80px;
+	height: 80px; 
+  }
+  
+  .character.selected {
+	border-color: #007bff;
+  }
+  
+
+/* Icono del usuario */
+.user-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+
+.team-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.team {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 90px;
+    margin-top: 20px;
+	margin-left: 70px;
+	margin-right: 70px;
+}
+
+.team-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s;
+    width: 150px;
+}
+
+.team-card:hover {
+    transform: scale(1.05);
+}
+
+.pokemon-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.pokemon-stats {
+    font-size: 16px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.pokemon-stats p {
+    margin: 5px 0;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: red;
+}
+
+.remove-btn:hover {
+    color: darkred;
+}
+
+.drag-handle {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    cursor: grab;
+}
+
+.menu-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* src/index.css */
+
+/* Estilos para la barra de búsqueda */
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #555;
+    padding: 15px 20px;
+    border-radius: 25px;
+    position: relative;
+}
+
+.form-group input {
+    font-family: inherit;
+    width: 300px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+/* Estilos para las sugerencias */
+.suggestions {
+    position: absolute;
+    top: 55px; 
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 0 0 25px 25px;
+    max-height: 150px; 
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.suggestions li {
+    padding: 10px 20px; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 18px; 
+}
+
+.suggestions li.active,
+.suggestions li:hover {
+    background: #f0f0f0;
+}
+
+.suggestions li img.suggestion-icon {
+    width: 32px; 
+    height: 32px;
+    margin-right: 15px;
+}
+
+
+/* Estilos para el icono de añadir */
+.add-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.add-icon:hover {
+    transform: scale(1.2);
+}
+
+.card-pokemon {
+    position: relative;
+    /* Otros estilos existentes */
+}
+
+
+/* src/index.css */
+
+/* Estilos para el botón de añadir al equipo */
+.btn-add-team {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 10px;
+}
+
+.btn-add-team:hover {
+    background-color: var(--color-primary-hover);
+    transform: scale(1.05);
+}
+
+.pokemon-page {
+    text-align: center;
+    padding: 20px;
+}
+
+.pokemon-number {
+    font-size: 100px;
+    color: var(--color-primary);
+}
+
+.pokemon-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pokemon-image {
+    margin-bottom: 20px;
+}
+
+.pokemon-info {
+    text-align: left;
+    max-width: 400px;
+}
+
+.pokemon-types .type {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: white;
+}
+
+.pokemon-base-stats {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+
+.container-stats {
+    margin-top: 20px;
+}
+
+.stat-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.stat-group span {
+    flex: 1;
+    text-transform: capitalize;
+}
+
+.progress-bar-container {
+    flex: 4;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: var(--color-primary);
+    border-radius: 5px;
+}
+
+.counter-stat {
+    flex: 1;
+    text-align: right;
+}
+
+
+.alert {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 5px 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 1;
+}
+
+/* src/index.css */
+/* Styles for ComparatorPage */
+/* src/index.css */
+/* Styles for ComparatorPage */
+.comparator-page {
+    text-align: center;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.search-bar-container {
+    position: relative;
+}
+
+.search-bar {
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background: #f0f0f0;
+}
+
+.comparison-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pokemon-info {
+    text-align: center;
+}
+
+.pokemon-info img {
+    width: 150px;
+    height: 150px;
+}
+
+.stats-comparison {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.stat-table th,
+.stat-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.stat-winner {
+    color: green;
+}
+
+.stat-loser {
+    color: red;
+}
+
+.spacer {
+    height: 50px;
+}
+

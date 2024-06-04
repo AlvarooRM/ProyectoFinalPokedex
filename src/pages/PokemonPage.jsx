@@ -1,15 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Loader } from '../components';
 import { PokemonContext } from '../context/PokemonContext';
 import { primerMayuscula } from '../helper/helper';
 
 export const PokemonPage = () => {
-    const { getPokemonByID, addPokemonToTeam, team } = useContext(PokemonContext);
+    const { getPokemonByID, addPokemonToTeam, getSpeciesData, getEvolutionChain } = useContext(PokemonContext);
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true);
     const [pokemon, setPokemon] = useState({});
-    const [alreadyInTeam, setAlreadyInTeam] = useState(false);
+    const [evolutionChain, setEvolutionChain] = useState([]);
+    const [comment, setComment] = useState('');
+    const [comments, setComments] = useState([]);
 
     const { id } = useParams();
 
@@ -19,21 +22,69 @@ export const PokemonPage = () => {
         setLoading(false);
     };
 
+    const fetchEvolutionChain = async (id) => {
+        const speciesData = await getSpeciesData(id);
+        const evolutionData = await getEvolutionChain(speciesData.evolution_chain.url);
+        const chain = extractEvolutionChain(evolutionData.chain);
+        setEvolutionChain(chain);
+    };
+
+    const extractEvolutionChain = (chain) => {
+        let evolutions = [];
+        let current = chain;
+        while (current) {
+            evolutions.push({
+                name: current.species.name,
+                id: current.species.url.split('/').slice(-2, -1)[0], // Obtener el ID del URL
+            });
+            current = current.evolves_to[0];
+        }
+        return evolutions;
+    };
+
     useEffect(() => {
         fetchPokemon(id);
+        fetchEvolutionChain(id);
+        loadComments(id);
     }, [id]);
-
-    const handleAddToTeam = () => {
-        if (team.find(p => p.id === pokemon.id)) {
-            setAlreadyInTeam(true);
-            setTimeout(() => setAlreadyInTeam(false), 3000);
-        } else {
-            addPokemonToTeam(pokemon);
-        }
-    };
 
     const getProgressBarWidth = (stat) => {
         return `${(stat / 150) * 100}%`;
+    };
+
+    const handleEvolutionClick = (evolutionId) => {
+        navigate(`/pokemon/${evolutionId}`);
+        window.scrollTo(0, 0); // Hacer scroll hacia arriba
+    };
+
+    const handleCommentChange = (e) => {
+        setComment(e.target.value);
+    };
+
+    const handleCommentSubmit = () => {
+        if (comment.trim()) {
+            const newComments = [...comments, comment];
+            setComments(newComments);
+            saveComments(id, newComments);
+            setComment('');
+        }
+    };
+
+    const handleCommentDelete = (index) => {
+        const newComments = comments.filter((_, i) => i !== index);
+        setComments(newComments);
+        saveComments(id, newComments);
+    };
+
+    const saveComments = (pokemonId, comments) => {
+        localStorage.setItem(`comments-${pokemonId}`, JSON.stringify(comments));
+    };
+
+    const loadComments = (pokemonId) => {
+        const savedComments = localStorage.getItem(`comments-${pokemonId}`);
+        if (savedComments) {
+            setComments(JSON.parse(savedComments));
+        }
     };
 
     return (
@@ -70,10 +121,9 @@ export const PokemonPage = () => {
                                     <span>{pokemon.weight / 10}KG</span>
                                 </div>
                             </div>
-                            <button className="btn-add-team" onClick={handleAddToTeam}>
+                            <button className="btn-add-team" onClick={() => addPokemonToTeam(pokemon)}>
                                 Añadir a mi equipo
                             </button>
-                            {alreadyInTeam && <div className="alert">Este Pokémon ya está en tu equipo</div>}
                         </div>
                     </div>
 
@@ -93,6 +143,46 @@ export const PokemonPage = () => {
                                 </div>
                             ))}
                         </div>
+                    </div>
+
+                    <div className='container-evolutions'>
+                        <h2>Evoluciones</h2>
+                        <div className='evolutions'>
+                            {evolutionChain.map((evolution, index) => (
+                                <div 
+                                    key={index} 
+                                    className='evolution'
+                                    onClick={() => handleEvolutionClick(evolution.id)}
+                                >
+                                    <img
+                                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${evolution.id}.png`}
+                                        alt={evolution.name}
+                                    />
+                                    <p>{primerMayuscula(evolution.name)}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className='container-comments'>
+                        <h2>Comentarios</h2>
+                        <div className='comments-list'>
+                            {comments.map((comment, index) => (
+                                <div key={index} className='comment'>
+                                    {comment}
+                                    <button className='delete-comment' onClick={() => handleCommentDelete(index)}>X</button>
+                                </div>
+                            ))}
+                        </div>
+                        <textarea
+                            value={comment}
+                            onChange={handleCommentChange}
+                            placeholder='Escribe tu comentario...'
+                            rows='3'
+                        ></textarea>
+                        <button className="btn-add-comment" onClick={handleCommentSubmit}>
+                            Añadir Comentario
+                        </button>
                     </div>
                 </>
             )}

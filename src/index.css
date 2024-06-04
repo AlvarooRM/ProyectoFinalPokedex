@@ -35,13 +35,13 @@
 body {
 	font-family: 'Montserrat';
 }
-/* Globales */
+
+
 .container {
 	max-width: 1200px;
 	margin: 0 auto;
 }
 
-/* Header */
 header {
 	display: flex;
 	align-items: center;
@@ -104,7 +104,7 @@ header form {
 	color: #000;
 }
 
-/* Btn Filter */
+
 .container-filter {
 	display: flex;
 }
@@ -123,7 +123,8 @@ header form {
 	height: 30px;
 	stroke: #555;
 }
-/* Card List Pokemon */
+
+
 .card-list-pokemon {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -195,7 +196,7 @@ header form {
 }
 
 
-/* Types of Pokemon */
+
 .water {
 	background-color: var(--color-water);
 }
@@ -268,7 +269,7 @@ header form {
 	background-color: var(--color-dark);
 }
 
-/* Container Filters */
+
 .container-filters {
 	display: flex;
 	justify-content: center;
@@ -312,11 +313,6 @@ header form {
 	cursor: pointer;
 }
 
-/* 
-======================================= 
-Styles of Pokemon Single Page
-======================================= 
-*/
 
 .main-pokemon {
 	display: flex;
@@ -388,7 +384,6 @@ Styles of Pokemon Single Page
 	font-size: 20px;
 }
 
-/* Stats */
 .container-stats {
 	display: flex;
 	gap: 50px;
@@ -420,7 +415,6 @@ Styles of Pokemon Single Page
 	background-color: var(--color-primary);
 	border-radius: 10px;
 }
-/* Search Page */
 
 .p-search{
 	margin-bottom: 30px;
@@ -431,7 +425,6 @@ Styles of Pokemon Single Page
 	font-weight: 700;
 }
 
-/* Loader */
 
 .container-loader{
 	display: flex;
@@ -439,7 +432,7 @@ Styles of Pokemon Single Page
 	margin: 200px 0;
 }
 
-/* Btn Load More */
+
 
 .container-btn-load-more{
 	display: flex;
@@ -465,7 +458,7 @@ Styles of Pokemon Single Page
 }
 
 
-/* Estilos generales para los modales */
+
 .modal-overlay {
 	position: fixed;
 	top: 0;
@@ -549,7 +542,7 @@ Styles of Pokemon Single Page
 	margin-bottom: 15px;
   }
   
-  /* Estilos para la selección de personajes */
+
   .character-selection {
 	text-align: center;
 	margin-bottom: 15px;
@@ -579,7 +572,7 @@ Styles of Pokemon Single Page
   }
   
 
-/* Icono del usuario */
+
 .user-icon {
     background: none;
     border: none;
@@ -691,9 +684,7 @@ Styles of Pokemon Single Page
     height: 20px;
 }
 
-/* src/index.css */
 
-/* Estilos para la barra de búsqueda */
 .form-group {
     display: flex;
     align-items: center;
@@ -712,7 +703,6 @@ Styles of Pokemon Single Page
     font-size: 15px;
 }
 
-/* Estilos para las sugerencias */
 .suggestions {
     position: absolute;
     top: 55px; 
@@ -746,7 +736,6 @@ Styles of Pokemon Single Page
 }
 
 
-/* Estilos para el icono de añadir */
 .add-icon {
     position: absolute;
     bottom: 10px;
@@ -763,13 +752,10 @@ Styles of Pokemon Single Page
 
 .card-pokemon {
     position: relative;
-    /* Otros estilos existentes */
 }
 
 
-/* src/index.css */
 
-/* Estilos para el botón de añadir al equipo */
 .btn-add-team {
     display: inline-block;
     background-color: var(--color-primary);
@@ -876,10 +862,7 @@ Styles of Pokemon Single Page
     z-index: 1;
 }
 
-/* src/index.css */
-/* Styles for ComparatorPage */
-/* src/index.css */
-/* Styles for ComparatorPage */
+
 .comparator-page {
     text-align: center;
 }
@@ -969,3 +952,104 @@ Styles of Pokemon Single Page
     height: 50px;
 }
 
+.container-evolutions {
+    margin-top: 30px;
+}
+
+.container-evolutions h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.evolutions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.evolution {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.evolution img {
+    width: 200px;
+    height: 200px;
+    transition: transform 0.2s;
+}
+
+.evolution p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.evolution:hover img {
+    transform: scale(1.1);
+}
+
+.container-comments {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.container-comments h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.comments-list {
+    margin-bottom: 20px;
+}
+
+.comment {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    position: relative;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+    resize: none;
+}
+
+.btn-add-comment {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 10px;
+}
+
+.btn-add-comment:hover {
+    background-color: var(--color-primary-hover);
+    transform: scale(1.05);
+}
+
+.delete-comment {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 16px;
+}

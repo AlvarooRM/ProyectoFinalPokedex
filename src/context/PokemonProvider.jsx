@@ -111,6 +111,19 @@ export const PokemonProvider = ({ children }) => {
         setOffset(offset + 25);
     };
 
+    const getSpeciesData = async (id) => {
+        const baseURL = 'https://pokeapi.co/api/v2/';
+        const res = await fetch(`${baseURL}pokemon-species/${id}`);
+        const data = await res.json();
+        return data;
+    };
+
+    const getEvolutionChain = async (url) => {
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    };
+
     const [typeSelected, setTypeSelected] = useState({
         grass: false,
         normal: false,
@@ -180,6 +193,8 @@ export const PokemonProvider = ({ children }) => {
                 setActive,
                 handleCheckbox,
                 filteredPokemons,
+                getSpeciesData,
+                getEvolutionChain,
             }}
         >
             {children}
